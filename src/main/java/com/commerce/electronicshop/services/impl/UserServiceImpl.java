@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(String userId) {
-        User user=userRepository.findById(userId).orElseThrow(()-> new RuntimeException("User not found with given id");
+        User user=userRepository.findById(userId).orElseThrow(()-> new RuntimeException("User not found with given id"));
         //delete user
         userRepository.delete(user);
     }
@@ -85,8 +85,10 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> searchUser(String keyword)
     {
         List<User> users = userRepository.findByNameContaining(keyword);
-       Stream<UserDto> dtoList = users.stream().map(user -> entityToDto(user));
-        return dtoList;
+        return users.stream()
+                .map(user -> mapper.map(user, UserDto.class))
+                .collect(Collectors.toList());
+
     }
     private UserDto entityToDto(User savedUser)
     {
