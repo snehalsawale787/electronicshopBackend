@@ -2,6 +2,7 @@ package com.commerce.electronicshop.dtos;
 
 
 
+import com.commerce.electronicshop.validate.ImageNameValid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -16,7 +17,7 @@ import lombok.*;
 public class UserDto {
     private String userId;
 
-    @Size(min = 3,max = 15,message = "Invalid Name!!")
+    @Size(min = 3,max = 20,message = "Invalid Name!!")
     private String name;
 
     @Email(message = "Invalid user email!!")
@@ -33,9 +34,10 @@ public class UserDto {
     @NotBlank(message = "Write something about yourself !!")
     private String about;
 
-    //@Patter
+    //@Pattern
     //Custom validator
 
+    @ImageNameValid
     private String imageName;
 
 }

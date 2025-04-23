@@ -21,7 +21,7 @@ public class UserController {
 
     //create
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto)
+    public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto)
     {
         UserDto userDto1=userService.createUser(userDto);
         return new ResponseEntity<>(userDto1, HttpStatus.CREATED);
@@ -29,7 +29,7 @@ public class UserController {
     //update
     @PutMapping("/{userId}")
     public ResponseEntity<UserDto> updateUser(@PathVariable("userId") String userId,
-       @RequestBody UserDto userDto)
+       @Valid @RequestBody UserDto userDto)
     {
         UserDto updatedUserDto= userService.updateUser(userDto, userId);
         return new ResponseEntity<>(updatedUserDto,HttpStatus.OK);
@@ -49,9 +49,14 @@ public class UserController {
     }
     //get all
 @GetMapping
-    public ResponseEntity<List<UserDto>> getAllUser()
+    public ResponseEntity<List<UserDto>> getAllUser(
+            @RequestParam(value = "pageNumber",defaultValue = "0",required = false) int pageNumber,
+            @RequestParam(value= "pageSize",defaultValue = "10",required = false) int pageSize,
+            @RequestParam(value= "sortBy",defaultValue = "name",required = false) String sortBy,
+            @RequestParam(value= "sortDir",defaultValue = "asc",required = false) String sortDir
+)
     {
-        return new ResponseEntity<>(userService.getAllUser(),HttpStatus.OK);
+        return new ResponseEntity<>(userService.getAllUser(pageNumber,pageSize,sortBy,sortDir),HttpStatus.OK);
     }
 
     //get single

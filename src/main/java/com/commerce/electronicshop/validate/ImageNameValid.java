@@ -1,6 +1,7 @@
 package com.commerce.electronicshop.validate;
 
 import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 
 import java.lang.annotation.*;
 
@@ -17,5 +18,5 @@ public @interface  ImageNameValid {
     Class<?>[] groups() default {};
 
     //additional information about annotation
-    //Class<? extends Payload>[] payload() default { };
+    Class<? extends Payload>[] payload() default { };
 }
