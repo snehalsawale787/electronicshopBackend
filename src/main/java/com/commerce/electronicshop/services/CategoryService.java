@@ -1,6 +1,7 @@
 package com.commerce.electronicshop.services;
 
 import com.commerce.electronicshop.dtos.CategoryDto;
+import com.commerce.electronicshop.dtos.PageableResponse;
 
 import java.awt.print.Pageable;
 
@@ -16,7 +17,7 @@ CategoryDto update(CategoryDto categoryDto,String categoryId);
 void delete(String categoryId);
 
     //get all
-//PageableResponse<CategoryDto> getAll();
+PageableResponse<CategoryDto> getAll(int pageNumber,int pageSize,String sortBy,String sortDir);
 
     //get single category detail
 CategoryDto get(String categoryId);
